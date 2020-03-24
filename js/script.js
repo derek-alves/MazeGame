@@ -3,7 +3,17 @@
     var ctx = cnv.getContext("2d");
 
     var WIDTH = cnv.width, HEIGHT = cnv.height;
+
     var titleSize = 64;
+    var titleSrcSize = 96;
+
+
+    var img = new Image();
+        img.src = 'img/img.png';
+        img.addEventListener("load",function(){
+            requestAnimationFrame(loop,cnv);
+        },false);
+
     var LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40;
     var mvLeft = mvUp = mvRight = mvDown = false;
 
@@ -204,11 +214,16 @@ window.addEventListener("keyup",keyupHandler,false);
         for(var row in maze){
             for(var column in maze[row]){
                 var title = maze[row][column];
-                if(title === 1){
+                //if(title === 1){ responsavel por renderizar as paredes
                     var x = column * titleSize;
                     var y = row * titleSize;
-                    ctx.fillRect(x,y,titleSize,titleSize);
-                }
+                    //ctx.fillRect(x,y,titleSize,titleSize); fillrect = só renderiza elementos quadradados na tela
+                    ctx.drawImage(
+                        img,
+                        title * titleSrcSize,0,titleSrcSize,titleSrcSize,
+                        x,y, titleSize,titleSize
+                    ); 
+                
             }
         }
         ctx.fillStyle='#00f';
@@ -221,6 +236,4 @@ window.addEventListener("keyup",keyupHandler,false);
         render();
         requestAnimationFrame(loop,cnv);
     }
-    requestAnimationFrame(loop,cnv);
-
 }());
