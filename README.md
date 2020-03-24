@@ -1,5 +1,5 @@
 # MazeGame
-###Game developed for the purpose of study
+- Game developed for the purpose of study
   * Map
   * Character movement
   * Collision
